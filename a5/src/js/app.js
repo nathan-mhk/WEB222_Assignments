@@ -17,84 +17,95 @@
 // Create local variables to work with it in this file.
 const { artists, songs } = window;
 
-// For debugging, display all of our data in the console. You can remove this later.
-// console.log({ artists, songs }, "App Data");
+function createAnchor(href, textContent) {
+  const anchor = document.createElement("a");
+
+  anchor.setAttribute("href", href);
+  anchor.setAttribute("target", "_blank");
+  anchor.textContent = textContent;
+
+  return anchor;
+}
+
+function updateLinks({ name, urls }) {
+  const selection = document.getElementById("selected-artist");
+  
+  // Selected artist
+  selection.textContent = `${name} (`;
+
+  // Create the links
+  for (let i = 0; i < urls.length; ++i) {
+    const link = urls[i];
+
+    selection.insertAdjacentElement("beforeend", createAnchor(link.url, link.name));
+
+    if (i < urls.length - 1) {
+      selection.insertAdjacentText("beforeend", ", ");
+    }
+  }
+  selection.insertAdjacentText("beforeend", ")");
+}
+
+function updateSongs({ artistId }) {
+  // Table
+  const tbody = document.getElementById("songs");
+  tbody.innerHTML = "";
+
+  // Filter songs
+  const filteredSongs = songs.filter((song) => {
+    return !song.explicit && song.artistId === artistId;
+  });
+
+  for (const song of filteredSongs) {
+    // <tr>
+    const tr = document.createElement("tr");
+    tr.onclick = () => console.log({ song });
+
+    // <td> Song Name
+    const tdName = document.createElement("td");
+    
+    tdName.appendChild(createAnchor(song.url, song.title));
+
+    tr.appendChild(tdName);
+
+    // <td> Year
+    const tdYear = document.createElement("td");
+    tdYear.textContent = song.year;
+
+    tr.appendChild(tdYear);
+
+    // <td> Duration
+    const tdDuration = document.createElement("td");
+    const secs = song.duration;
+    tdDuration.textContent = `${parseInt(secs / 60)}:${(secs % 60)
+      .toString()
+      .padStart(2, "0")}`;
+
+    tr.appendChild(tdDuration);
+
+    tbody.appendChild(tr);
+  }
+}
+
+function createArtistButtons(artist) {
+  const button = document.createElement("button");
+
+  button.textContent = artist.name;
+
+  button.onclick = () => {
+    updateLinks(artist);
+    updateSongs(artist);
+  };
+
+  return button;
+}
 
 addEventListener("DOMContentLoaded", () => {
   const menu = document.getElementById("menu");
-  const selection = document.getElementById("selected-artist");
-  const tbody = document.getElementById("songs");
-
   let first = true;
 
   artists.forEach((artist) => {
-    const button = document.createElement("button");
-
-    button.textContent = artist.name;
-    button.onclick = () => {
-      // Selected artist
-      selection.textContent = `${artist.name} (`;
-
-      const links = artist.urls;
-      for (let i = 0; i < links.length; ++i) {
-        const link = links[i];
-
-        const a = document.createElement("a");
-        a.setAttribute("href", link.url);
-        a.setAttribute("target", "_blank");
-        a.textContent = link.name;
-
-        selection.insertAdjacentElement("beforeend", a);
-
-        if (i < links.length - 1) {
-          selection.insertAdjacentText("beforeend", ", ");
-        }
-      }
-      selection.insertAdjacentText("beforeend", ")");
-
-      // Table
-      tbody.innerHTML = "";
-
-      // Filter songs
-      const filteredSongs = songs.filter((song) => {
-        return !song.explicit && song.artistId === artist.artistId;
-      });
-
-      filteredSongs.forEach((song) => {
-        // <tr>
-        const tr = document.createElement("tr");
-        tr.onclick = () => console.log({ song });
-
-        // <td> Song Name
-        const tdName = document.createElement("td");
-        const nameLink = document.createElement("a");
-
-        nameLink.setAttribute("href", song.url);
-        nameLink.setAttribute("target", "_blank");
-        nameLink.textContent = song.title;
-        tdName.appendChild(nameLink);
-
-        tr.appendChild(tdName);
-
-        // <td> Year
-        const tdYear = document.createElement("td");
-        tdYear.textContent = song.year;
-
-        tr.appendChild(tdYear);
-
-        // <td> Duration
-        const tdDuration = document.createElement("td");
-        const secs = song.duration;
-        tdDuration.textContent = `${parseInt(secs / 60)}:${(secs % 60)
-          .toString()
-          .padStart(2, "0")}`;
-
-        tr.appendChild(tdDuration);
-
-        tbody.appendChild(tr);
-      });
-    };
-
+    const button = createArtistButtons(artist)
     menu.appendChild(button);
 
     if (first) {
