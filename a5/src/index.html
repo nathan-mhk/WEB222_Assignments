@@ -10,6 +10,7 @@
     <title>WEB222 Music App</title>
     <!-- Classless CSS Stylesheet - https://watercss.kognise.dev/ -->
     <link rel="stylesheet" href="./css/water.css" />
+    <link rel="stylesheet" href="./css/nkong.css" />
   </head>
   <body>
     <header>
@@ -25,23 +26,11 @@
     <hr />
 
     <main>
-      <h2 id="selected-artist">
+      <h2 id="selected-artist" align="center">
         <!-- Dynamically update the selected category title -->
       </h2>
 
-      <table>
-        <thead>
-          <!-- Statically create the headings for your table here -->
-          <tr>
-            <th>Song Name</th>
-            <th>Year Recorded</th>
-            <th>Duration (mm:ss)</th>
-          </tr>
-        </thead>
-        <tbody id="songs">
-          <!-- Dynamically create your product rows here -->
-        </tbody>
-      </table>
+      <section id="cards"></section>
     </main>
 
     <!-- JavaScript Data Files -->

@@ -1,5 +1,5 @@
 /**
- * WEB222 – Assignment 04
+ * WEB222 – Assignment 05
  *
  * I declare that this assignment is my own work in accordance with
  * Seneca Academic Policy. No part of this assignment has been
@@ -10,7 +10,7 @@
  *
  *      Name:       Nathan Kong
  *      Student ID: 150950236
- *      Date:       2024-03-23
+ *      Date:       2024-04-04
  */
 
 // All of our data is available on the global `window` object.
@@ -27,11 +27,13 @@ function createAnchor(href, textContent) {
   return anchor;
 }
 
-function updateLinks({ name, urls }) {
+function updateLinks(artist) {
+  const { name, urls, region } = artist;
   const selection = document.getElementById("selected-artist");
-  
+
   // Selected artist
-  selection.textContent = `${name} (`;
+  selection.textContent = `${name} | ${region}`;
+  selection.insertAdjacentElement("beforeend", document.createElement("br"));
 
   // Create the links
   for (let i = 0; i < urls.length; ++i) {
@@ -40,16 +42,58 @@ function updateLinks({ name, urls }) {
     selection.insertAdjacentElement("beforeend", createAnchor(link.url, link.name));
 
     if (i < urls.length - 1) {
-      selection.insertAdjacentText("beforeend", ", ");
+      selection.insertAdjacentText("beforeend", " | ");
     }
   }
-  selection.insertAdjacentText("beforeend", ")");
+}
+
+function createCard(song) {
+  const { url, imageUrl, title, year, duration } = song;
+
+  // <div> Card
+  const card = document.createElement("div");
+  card.className = "card";
+
+  // <a><img></a> Clickable Image
+  const img = document.createElement("img");
+  img.setAttribute("src", imageUrl);
+
+  const imgLink = createAnchor(url, "");
+  imgLink.appendChild(img);
+
+  card.appendChild(imgLink);
+
+  // <h3> Song Name
+  const songName = document.createElement("h3");
+  songName.textContent = title;
+
+  card.appendChild(songName);
+
+  // <div> Year - Duration flex box
+  const yearDuration = document.createElement("div");
+
+  // <time> Year
+  const songYear = document.createElement("time");
+  songYear.textContent = year;
+
+  yearDuration.appendChild(songYear);
+
+  // <p> Duration
+  const songDuration = document.createElement("p");
+  const secs = duration;
+  songDuration.textContent = `${parseInt(secs / 60)}:${(secs % 60).toString().padStart(2, "0")}`;
+
+  yearDuration.appendChild(songDuration);
+
+  card.appendChild(yearDuration);
+
+  return card;
 }
 
 function updateSongs({ artistId }) {
-  // Table
-  const tbody = document.getElementById("songs");
-  tbody.innerHTML = "";
+  // Cards container
+  const cards = document.getElementById("cards");
+  cards.innerHTML = "";
 
   // Filter songs
   const filteredSongs = songs.filter((song) => {
@@ -57,33 +101,8 @@ function updateSongs({ artistId }) {
   });
 
   for (const song of filteredSongs) {
-    // <tr>
-    const tr = document.createElement("tr");
-    tr.onclick = () => console.log({ song });
-
-    // <td> Song Name
-    const tdName = document.createElement("td");
-    
-    tdName.appendChild(createAnchor(song.url, song.title));
-
-    tr.appendChild(tdName);
-
-    // <td> Year
-    const tdYear = document.createElement("td");
-    tdYear.textContent = song.year;
-
-    tr.appendChild(tdYear);
-
-    // <td> Duration
-    const tdDuration = document.createElement("td");
-    const secs = song.duration;
-    tdDuration.textContent = `${parseInt(secs / 60)}:${(secs % 60)
-      .toString()
-      .padStart(2, "0")}`;
-
-    tr.appendChild(tdDuration);
-
-    tbody.appendChild(tr);
+    // Append the card to the cards container
+    cards.appendChild(createCard(song));
   }
 }
 
@@ -105,7 +124,7 @@ addEventListener("DOMContentLoaded", () => {
   let first = true;
 
   artists.forEach((artist) => {
-    const button = createArtistButtons(artist)
+    const button = createArtistButtons(artist);
     menu.appendChild(button);
 
     if (first) {

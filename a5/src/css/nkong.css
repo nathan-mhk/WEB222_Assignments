@@ -1,0 +1,78 @@
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    Helvetica,
+    Segoe UI Emoji,
+    Apple Color Emoji,
+    Noto Color Emoji,
+    source-han-sans-hong-kong,
+    SF Pro HK,
+    PingFang HK,
+    Microsoft JhengHei,
+    Noto Sans,
+    sans-serif;
+}
+
+nav {
+  text-align: center;
+}
+
+section {
+  grid-gap: 1em;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+}
+
+.card {
+  grid-gap: 0.8em;
+  background-color: #0c151c;
+  border-radius: 6px;
+  display: grid;
+}
+
+.card:hover {
+  text-decoration: none;
+}
+
+.card img {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.card h3 {
+  padding: 0 1em;
+}
+
+.card h3,
+.card p {
+  color: #ffbe85;
+}
+
+.card div {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.25em 1em;
+  display: flex;
+}
+
+.card time {
+  background: none;
+  padding: 0;
+}
+
+.card img,
+.card h3,
+.card p {
+  margin: 0;
+}
