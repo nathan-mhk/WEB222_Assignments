@@ -19,20 +19,28 @@
       <p align="center">Discover the World of Indie Pop - From Every Corner of the Globe</p>
     </header>
 
-    <nav id="menu">
-      <!-- Dynamically create your menu category buttons here -->
-    </nav>
+    <nav id="menu"></nav>
 
     <hr />
 
     <main>
-      <h2 id="selected-artist" align="center">
-        <!-- Dynamically update the selected category title -->
-      </h2>
-
+      <h2 id="selected-artist" align="center"></h2>
       <section id="cards"></section>
     </main>
 
+    <footer>
+      <form id="signUp" action="https://httpbin.org/post" method="post">
+        <label>Sign up for new artists and songs!</label>
+        <div id="signUpInputs">
+          <input id="email" type="email" placeholder="example@email.com" name="email" required>
+          <input type="submit" value="Sign Up" name="emailBtn" formtarget="_blank">
+          <p id="invalidEmail">* Invalid Email Address</p>
+        </div>
+      </form>
+      <div>
+        Made with ❤️ by Nathan Kong
+      </div>
+    </footer>
     <!-- JavaScript Data Files -->
     <script src="./js/artists.js"></script>
     <script src="./js/songs.js"></script>

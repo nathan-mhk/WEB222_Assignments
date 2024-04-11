@@ -8,7 +8,7 @@
     "prettier": "prettier --write \"src/**/*.{html,css,js}\"",
     "check": "run-s eslint",
     "test": "npm run check",
-    "server": "parcel src/index.html",
+    "server": "parcel src/*.html",
     "start": "npm run server",
     "zip": "bestzip assignment-5.zip src/*",
     "clean": "rimraf assignment-5.zip .parcel-cache dist",

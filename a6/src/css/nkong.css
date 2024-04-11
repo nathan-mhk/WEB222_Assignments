@@ -76,3 +76,11 @@ section {
 .card p {
   margin: 0;
 }
+
+footer {
+  text-align: center;
+}
+
+footer div {
+  margin-top: 0.5em
+}
