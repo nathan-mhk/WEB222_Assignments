@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+
+    <!-- Change this to your name-->
+    <meta name="author" content="Nathan Kong" />
+
+    <title>WEB222 Music App - Artist Request</title>
+    <!-- Classless CSS Stylesheet - https://watercss.kognise.dev/ -->
+    <link rel="stylesheet" href="./css/water.css" />
+    <link rel="stylesheet" href="./css/nkong.css" />
+  </head>
+  <body>
+    <header>
+      <h1 align="center">IndieVerse - Request Artist</h1>
+      <p align="center">Don't see your favourite artists? Let us know!</p>
+    </header>
+
+    <hr />
+
+    <main>
+    <form id="requestForm" action="https://httpbin.org/post" method="post">
+        <div id="requestFormFields">
+            <label>Artist's Name <span>*</span></label>
+            <input type="text" name="name" required>
+            <label>Music Genre <span>*</span></label>
+            <input type="text" list="genreOpt" name="genre" required>
+            <datalist id="genreOpt">
+                <option value="Indie">
+                <option value="Rock">
+                <option value="Metal">
+                <option value="Pop">
+                <option value="Alternative">
+                <option value="Classical">
+                <option value="Hip-hop">
+                <option value="Jazz">
+                <option value="R&B">
+                <option value="Dance">
+                <option value="Folk">
+            </datalist>
+            <label>Social Media Links <span>*</span><br/>(Separated with commas)</label>
+            <input type="text" name="socialMedias" placeholder="example1.com,https://example2.com,..." required>
+            <label class="topLabel">Songs & Videos <span>*</span></label>
+            <div id="songsVids">
+                <div>
+                    <input type="url" name="songsVids0" required>
+                    <button id="songsVidsAdd">Add</button>
+                </div>
+            </div>
+            <label>Explicit Lyrics</label>
+            <input type="checkbox" name="explicit">
+            <label class="topLabel">Why this artist should be added <span>*</span></label>
+            <textarea name="reason" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="SOFT" required></textarea>
+        </div>
+        <div align="center">
+            <p>* Required Fields</p>
+            <input type="submit" value="Submit Request" name="requestBtn" formtarget="_blank">
+        </div>
+    </form>
+    </main>
+
+    <footer>
+      <div>
+        Made with ❤️ by Nathan Kong
+      </div>
+    </footer>
+    <!-- Main App JavaScript File -->
+    <script src="./js/request.js"></script>
+  </body>
+</html>

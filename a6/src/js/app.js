@@ -120,6 +120,15 @@ function createArtistButtons(artist) {
 }
 
 function requestArtistButton() {
+  const button = document.createElement("button");
+  button.id = "requestArtist";
+  button.textContent = "Request A New Artist";
+  
+  button.onclick = () => {
+    window.open("./request.html", "_blank");
+  };
+
+  return button;
 }
 
 function loadMenu() {
@@ -136,6 +145,7 @@ function loadMenu() {
     }
   });
 
+  menu.appendChild(requestArtistButton());
 }
 
 function newsLetterForm() {

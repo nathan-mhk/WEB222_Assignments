@@ -27,6 +27,10 @@ nav {
   text-align: center;
 }
 
+#requestArtist {
+  font-style: italic;
+}
+
 section {
   grid-gap: 1em;
   grid-template-rows: auto;
@@ -83,4 +87,68 @@ footer {
 
 footer div {
   margin-top: 0.5em
+}
+
+#signUp div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#signUp label {
+  font-size: 1.8em;
+}
+
+#signUpInputs {
+  margin-top: 0.5em;
+}
+
+#signUpInputs p {
+  color: red;
+  font-weight: bold;
+  margin-left: 0.5em;
+}
+
+#requestForm p {
+  color: red;
+}
+
+#requestFormFields {
+  display: grid;
+  grid-row-gap: 1em;
+  grid-column-gap: 3em;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#requestFormFields label {
+  align-self: center;
+  text-align: right
+}
+
+label span {
+  color: red;
+}
+
+.topLabel {
+  align-self: start !important;
+  padding-top: 4%;
+}
+
+
+#songsVids div {
+  display: flex;
+  flex-direction: row;
+}
+
+#songsVids .removeButton {
+  background: transparent;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#requestFormFields div input {
+  flex-grow: 1;
 }
