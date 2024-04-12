@@ -45,18 +45,19 @@
             <label class="topLabel">Songs & Videos <span>*</span></label>
             <div id="songsVids">
                 <div>
-                    <input type="url" name="songsVids0" required>
+                    <input type="text" name="songsVids" required>
                     <button id="songsVidsAdd">Add</button>
                 </div>
             </div>
             <label>Explicit Lyrics</label>
-            <input type="checkbox" name="explicit">
+            <input type="checkbox" name="explicit" value="1">
             <label class="topLabel">Why this artist should be added <span>*</span></label>
-            <textarea name="reason" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="SOFT" required></textarea>
+            <textarea name="reason" dir="ltr" wrap="SOFT" required></textarea>
         </div>
         <div align="center">
             <p>* Required Fields</p>
             <input type="submit" value="Submit Request" name="requestBtn" formtarget="_blank">
+            <p class="invalidWarning"> Please double check the values you entered!<br/>Invalid fields are highlighted</p>
         </div>
     </form>
     </main>

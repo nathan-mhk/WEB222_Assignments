@@ -148,26 +148,34 @@ function loadMenu() {
   menu.appendChild(requestArtistButton());
 }
 
+function validateEmail() {
+  const emailInput = document.getElementById("email");
+
+  if (!String(emailInput.value).match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  )) {
+    emailInput.className = "invalid";
+    return false;
+  }
+  emailInput.className = "";
+  return true;
+}
+
+
 function newsLetterForm() {
-  const invalidEmail = document.getElementById("invalidEmail");
-  invalidEmail.style.display = "none";
+  const invalidWarning = document.getElementsByClassName("invalidWarning")[0];
+  invalidWarning.style.display = "none";
 
   const signUp = document.getElementById("signUp");
 
   signUp.addEventListener("submit", event => {
-    const emailInput = document.getElementById("email").value;
-
-    const res = String(emailInput).toLowerCase().match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-
-    if (!res) {
+    if (!validateEmail()) {
       event.preventDefault();
-      invalidEmail.style.display = "block";
+      invalidWarning.style.display = "block";
       return false;
     }
 
-    invalidEmail.style.display = "none";
+    invalidWarning.style.display = "none";
     return true;
   });
 }

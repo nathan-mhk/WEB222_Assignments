@@ -13,35 +13,15 @@
  *      Date:       2024-04-10
  */
 
-function getLastInputIndex(container) {
-    // Get the divs inside the "songsVids"
-    const subContainers = container.getElementsByTagName("div");
+const URL = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
 
-    // Get the last <input>, which is inside the last div
-    const lastDiv = subContainers[subContainers.length - 1];
-    const lastInput = lastDiv.getElementsByTagName("input")[0];
-
-    // Get the number of the last <input>. The result from the very first <input> should be "0"
-    const lastInputIndex = parseInt(lastInput.name.match(/\d+$/)) + 1;
-
-    return lastInputIndex > 999 ? -1 : lastInputIndex;
-}
-
-function renameInputs(container) {
-    const inputs = container.getElementsByTagName("input");
-
-    for (let i = 0; i < inputs.length; ++i) {
-        inputs[i].name = `songsVids${i}`;
-    }
-}
-
-function newSongsVidsField(container, lastInputIndex) {
+function newSongsVidsField(container) {
     // Create a new sub-container div for the input and "remove" button
     const newSubContainer = document.createElement("div");
 
     const newInput = document.createElement("input");
-    newInput.type = "url";
-    newInput.name = `songsVids${lastInputIndex}`;
+    newInput.type = "text";
+    newInput.name = "songsVids";
     newInput.required = true;
 
     newSubContainer.appendChild(newInput);
@@ -52,7 +32,6 @@ function newSongsVidsField(container, lastInputIndex) {
     removeButton.textContent = "⊖";
     removeButton.onclick = () => {
         container.removeChild(newSubContainer);
-        renameInputs(container);
     };
 
     newSubContainer.appendChild(removeButton);
@@ -68,31 +47,58 @@ function songsVids() {
     const button = document.getElementById("songsVidsAdd");
 
     button.onclick = () => {
-        const lastInputIndex = getLastInputIndex(container);
-
-        if (lastInputIndex === -1) {
-            console.log("You cannot add more than 1000 songs at once!");
-            return;
-        }
-
-        container.appendChild(newSongsVidsField(container, lastInputIndex));
+        container.appendChild(newSongsVidsField(container));
     };
 }
 
-function validateFields(form) {
-    const formData = new FormData(form);
-    // const 
-    return false;
+
+function validateForm() {
+    let valid = true;
+    const invalidClass = "invalid";
+
+    // Validate each social media URL
+    const socialMedias = document.getElementsByName("socialMedias")[0];
+
+    socialMedias.className = "";
+    for (const socialMedia of socialMedias.value.split(',')) {
+        if (!String(socialMedia).match(URL)) {
+            valid = false;
+            socialMedias.className = invalidClass;
+            break;
+        }
+    }
+
+    // Validate each songs/videos URL
+    const songsVids = document.getElementsByName("songsVids");
+
+    for (const songVid of songsVids) {
+        if (!String(songVid.value).match(URL)) {
+            valid = false;
+            songVid.className = invalidClass;
+        } else {
+            songVid.className = "";
+        }
+    }
+
+    return valid;
 }
 
 function submitRequest() {
+    const invalidWarning = document.getElementsByClassName("invalidWarning")[0];
+    invalidWarning.style.display = "none";
+
     const requestForm = document.getElementById("requestForm");
 
-    requestForm.addEventListener("submit", event => {
-        if (validateFields(requestForm)) {
+    requestForm.onsubmit = (event) => {
+        if (!validateForm()) {
             event.preventDefault();
+            invalidWarning.style.display = "block";
+            return false;
         }
-    });
+        
+        invalidWarning.style.display = "none";
+        return true;
+    };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
