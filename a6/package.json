@@ -10,8 +10,8 @@
     "test": "npm run check",
     "server": "parcel src/*.html",
     "start": "npm run server",
-    "zip": "bestzip assignment-5.zip src/*",
-    "clean": "rimraf assignment-5.zip .parcel-cache dist",
+    "zip": "bestzip assignment-6.zip src/*",
+    "clean": "rimraf assignment-6.zip .parcel-cache dist",
     "prepare-submission": "run-s prettier check zip"
   },
   "dependencies": {

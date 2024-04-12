@@ -21,51 +21,56 @@
     <hr />
 
     <main>
-    <form id="requestForm" action="https://httpbin.org/post" method="post">
+      <form id="requestForm" action="https://httpbin.org/post" method="post">
         <div id="requestFormFields">
-            <label>Artist's Name <span>*</span></label>
-            <input type="text" name="name" required>
-            <label>Music Genre <span>*</span></label>
-            <input type="text" list="genreOpt" name="genre" required>
-            <datalist id="genreOpt">
-                <option value="Indie">
-                <option value="Rock">
-                <option value="Metal">
-                <option value="Pop">
-                <option value="Alternative">
-                <option value="Classical">
-                <option value="Hip-hop">
-                <option value="Jazz">
-                <option value="R&B">
-                <option value="Dance">
-                <option value="Folk">
-            </datalist>
-            <label>Social Media Links <span>*</span><br/>(Separated with commas)</label>
-            <input type="text" name="socialMedias" placeholder="example1.com,https://example2.com,..." required>
-            <label class="topLabel">Songs & Videos <span>*</span></label>
-            <div id="songsVids">
-                <div>
-                    <input type="text" name="songsVids" required>
-                    <button id="songsVidsAdd">Add</button>
-                </div>
+          <label>Artist's Name <span>*</span></label>
+          <input type="text" name="name" required />
+          <label>Music Genre <span>*</span></label>
+          <input type="text" list="genreOpt" name="genre" required />
+          <datalist id="genreOpt">
+            <option value="Indie"></option>
+            <option value="Rock"></option>
+            <option value="Metal"></option>
+            <option value="Pop"></option>
+            <option value="Alternative"></option>
+            <option value="Classical"></option>
+            <option value="Hip-hop"></option>
+            <option value="Jazz"></option>
+            <option value="R&B"></option>
+            <option value="Dance"></option>
+            <option value="Folk"></option>
+          </datalist>
+          <label>Social Media Links <span>*</span><br />(Separated with commas)</label>
+          <input
+            type="text"
+            name="socialMedias"
+            placeholder="example1.com,https://example2.com,..."
+            required
+          />
+          <label class="topLabel">Songs & Videos <span>*</span></label>
+          <div id="songsVids">
+            <div>
+              <input type="text" name="songsVids" required />
+              <button id="songsVidsAdd">Add</button>
             </div>
-            <label>Explicit Lyrics</label>
-            <input type="checkbox" name="explicit" value="1">
-            <label class="topLabel">Why this artist should be added <span>*</span></label>
-            <textarea name="reason" dir="ltr" wrap="SOFT" required></textarea>
+          </div>
+          <label>Explicit Lyrics</label>
+          <input type="checkbox" name="explicit" value="1" />
+          <label class="topLabel">Why this artist should be added <span>*</span></label>
+          <textarea name="reason" dir="ltr" wrap="SOFT" required></textarea>
         </div>
         <div align="center">
-            <p>* Required Fields</p>
-            <input type="submit" value="Submit Request" name="requestBtn" formtarget="_blank">
-            <p class="invalidWarning"> Please double check the values you entered!<br/>Invalid fields are highlighted</p>
+          <p>* Required Fields</p>
+          <input type="submit" value="Submit Request" name="requestBtn" formtarget="_blank" />
+          <p class="invalidWarning">
+            Please double check the values you entered!<br />Invalid fields are highlighted
+          </p>
         </div>
-    </form>
+      </form>
     </main>
 
     <footer>
-      <div>
-        Made with ❤️ by Nathan Kong
-      </div>
+      <div>Made with ❤️ by Nathan Kong</div>
     </footer>
     <!-- Main App JavaScript File -->
     <script src="./js/utils.js"></script>

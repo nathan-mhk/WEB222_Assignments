@@ -17,74 +17,73 @@ const { formSubmitHandler, REGEX } = window;
 const { URL } = REGEX;
 
 function newSongsVidsField(container) {
-    // Create a new sub-container div for the input and "remove" button
-    const newSubContainer = document.createElement("div");
+  // Create a new sub-container div for the input and "remove" button
+  const newSubContainer = document.createElement("div");
 
-    const newInput = document.createElement("input");
-    newInput.type = "text";
-    newInput.name = "songsVids";
-    newInput.required = true;
+  const newInput = document.createElement("input");
+  newInput.type = "text";
+  newInput.name = "songsVids";
+  newInput.required = true;
 
-    newSubContainer.appendChild(newInput);
+  newSubContainer.appendChild(newInput);
 
-    // "Remove" button
-    const removeButton = document.createElement("button");
-    removeButton.className = "removeButton";
-    removeButton.textContent = "⊖";
-    removeButton.onclick = () => {
-        container.removeChild(newSubContainer);
-    };
+  // "Remove" button
+  const removeButton = document.createElement("button");
+  removeButton.className = "removeButton";
+  removeButton.textContent = "⊖";
+  removeButton.onclick = () => {
+    container.removeChild(newSubContainer);
+  };
 
-    newSubContainer.appendChild(removeButton);
+  newSubContainer.appendChild(removeButton);
 
-    return newSubContainer;
+  return newSubContainer;
 }
 
 function songsVids() {
-    // Get the "songsVids" div
-    const container = document.getElementById("songsVids");
+  // Get the "songsVids" div
+  const container = document.getElementById("songsVids");
 
-    // Get the "Add" button
-    const button = document.getElementById("songsVidsAdd");
+  // Get the "Add" button
+  const button = document.getElementById("songsVidsAdd");
 
-    button.onclick = () => {
-        container.appendChild(newSongsVidsField(container));
-    };
+  button.onclick = () => {
+    container.appendChild(newSongsVidsField(container));
+  };
 }
 
-
 function validateForm() {
-    let valid = true;
-    const invalidClass = "invalid";
+  let valid = true;
+  const invalidClass = "invalid";
 
-    // Validate each social media URL
-    const socialMedias = document.getElementsByName("socialMedias")[0];
+  // Validate each social media URL
+  const socialMedias = document.getElementsByName("socialMedias")[0];
 
-    socialMedias.className = "";
-    for (const socialMedia of socialMedias.value.split(',')) {
-        if (!String(socialMedia).match(URL)) {
-            valid = false;
-            socialMedias.className = invalidClass;
-            break;
-        }
+  socialMedias.className = "";
+  for (const socialMedia of socialMedias.value.split(",")) {
+    if (!String(socialMedia).match(URL)) {
+      valid = false;
+      socialMedias.className = invalidClass;
+      break;
     }
+  }
 
-    // Validate each songs/videos URL
-    const songsVids = document.getElementsByName("songsVids");
+  // Validate each songs/videos URL
+  const songsVids = document.getElementsByName("songsVids");
 
-    for (const songVid of songsVids) {
-        if (!String(songVid.value).match(URL)) {
-            valid = false;
-            songVid.className = invalidClass;
-        } else {
-            songVid.className = "";
-        }
+  for (const songVid of songsVids) {
+    if (!String(songVid.value).match(URL)) {
+      valid = false;
+      songVid.className = invalidClass;
+    } else {
+      songVid.className = "";
     }
+  }
 
-    return valid;
+  return valid;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    songsVids();
-    formSubmitHandler("requestForm", validateForm);
+  songsVids();
+  formSubmitHandler("requestForm", validateForm);
 });

@@ -87,7 +87,7 @@ footer {
 }
 
 footer div {
-  margin-top: 0.5em
+  margin-top: 0.5em;
 }
 
 #signUp div {
@@ -126,7 +126,7 @@ footer div {
 
 #requestFormFields label {
   align-self: center;
-  text-align: right
+  text-align: right;
 }
 
 label span {
@@ -137,7 +137,6 @@ label span {
   align-self: start !important;
   padding-top: 4%;
 }
-
 
 #songsVids div {
   display: flex;
