@@ -13,7 +13,8 @@
  *      Date:       2024-04-10
  */
 
-const URL = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+const { formSubmitHandler, REGEX } = window;
+const { URL } = REGEX;
 
 function newSongsVidsField(container) {
     // Create a new sub-container div for the input and "remove" button
@@ -83,25 +84,7 @@ function validateForm() {
     return valid;
 }
 
-function submitRequest() {
-    const invalidWarning = document.getElementsByClassName("invalidWarning")[0];
-    invalidWarning.style.display = "none";
-
-    const requestForm = document.getElementById("requestForm");
-
-    requestForm.onsubmit = (event) => {
-        if (!validateForm()) {
-            event.preventDefault();
-            invalidWarning.style.display = "block";
-            return false;
-        }
-        
-        invalidWarning.style.display = "none";
-        return true;
-    };
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     songsVids();
-    submitRequest();
+    formSubmitHandler("requestForm", validateForm);
 });

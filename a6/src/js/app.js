@@ -15,7 +15,8 @@
 
 // All of our data is available on the global `window` object.
 // Create local variables to work with it in this file.
-const { artists, songs } = window;
+const { artists, songs, formSubmitHandler, REGEX } = window;
+const { EMAIL } = REGEX;
 
 function createAnchor(href, textContent) {
   const anchor = document.createElement("a");
@@ -150,10 +151,7 @@ function loadMenu() {
 
 function validateEmail() {
   const emailInput = document.getElementById("email");
-
-  if (!String(emailInput.value).match(
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  )) {
+  if (!String(emailInput.value).match(EMAIL)) {
     emailInput.className = "invalid";
     return false;
   }
@@ -161,26 +159,7 @@ function validateEmail() {
   return true;
 }
 
-
-function newsLetterForm() {
-  const invalidWarning = document.getElementsByClassName("invalidWarning")[0];
-  invalidWarning.style.display = "none";
-
-  const signUp = document.getElementById("signUp");
-
-  signUp.addEventListener("submit", event => {
-    if (!validateEmail()) {
-      event.preventDefault();
-      invalidWarning.style.display = "block";
-      return false;
-    }
-
-    invalidWarning.style.display = "none";
-    return true;
-  });
-}
-
 addEventListener("DOMContentLoaded", () => {
   loadMenu();
-  newsLetterForm();
+  formSubmitHandler("signUp", validateEmail);
 });
